@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/7db1f01642.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="top-head">
+         
+            <nav class="navbar">
+                <div class="container">
+                   
+                    <label class="logo">XMEME</label>
+                    <button class="open-button"  data-modal-target="#modal">POST MEME</button>
+                </div>
+            </nav>
+              <div id="sub-head">
+                <div class="quote">
+                  <div class="quote-content">
+                    <p class="semi">"</p>
+                    <p class="write-up">Few Memes A Day Keeps Stress Away      </p>
+                    <p  class="semi">"</p>
+                  </div>
+                  <p id="author">- ANKIT JAISWAL ; )</p>
+                </div>
+              </div>
+    </div>
+  
+        <div id="mid">
+            <div class="Archeive-head">
+              <h2>YOUR FEED</h2>
+            </div>
+
+                  
+
+        </div>
+          <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="title">Created by ANKIT JAISWAL ; )</div>
+    
+                <button data-close-button class="close-button">&times</button>
+            </div>
+    
+            <div class="tab-content">
+                <div id="tab-name">
+                    <div id="tab1" data-tab-target="#signup" class="active ">XMEME</div>
+                </div>
+                <div id="signup" data-tab-content class="active">
+                  
+                    <p class="title1"> POST YOUR MEME </p>
+    
+                    <form method="post" action="{% url 'contentPage' %}" id="Sign-up-form">
+    
+                        {% csrf_token %}
+    
+                        <input type="input" name="Name" class="Sign-up-form-field" placeholder="Your Name">
+                        <input type="input" name="ImageUrl"  class="Sign-up-form-field" placeholder="Image URL">
+                        <input type="input" name="Caption"class="Sign-up-form-field" placeholder="Caption">
+                        <p id="Sign-up-error" class="error-msg"></p>
+    
+                        <input type="submit" value="SUBMIT MEME" id="Sign-up-form-submit" >
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+         <div class="modal" id="modal1">
+            <div class="modal-header">
+                <div class="title">Created by ANKIT JAISWAL ; )</div>
+    
+                <button data-close-button class="close-button">&times</button>
+            </div>
+    
+            <div class="tab-content">
+                <div id="tab-name">
+                    <div id="tab1" data-tab-target="#signup" class="active ">XMEME</div>
+                </div>
+                <div id="signup" data-tab-content class="active">
+                  
+                    <p class="title1"> EDIT YOUR MEME </p>
+    
+                    <form id="Sign-up-form">
+
+                        <input type="input"  id="imageurl" class="Sign-up-form-field" placeholder="Image URL">
+                        <input type="input"  id="caption" class="Sign-up-form-field" placeholder="Caption">
+                        <!--<input type="submit" value="APPLY CHANGES" id="Sign-up-form-submit" onclick="myFunction1({% url 'feedList' %})">-->
+                        <button  id="Sign-up-form-submit" onclick="update()">APPLY CHANGES</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+         
+    
+        <div id="overlay">
+    
+</body>
+</html>
+
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+   
+
+
+        
+    nav{
+        display: flex;
+        
+        align-items: center;
+        height: 8vh;
+        top: 0vh;
+        width: 100%;
+        background-color: #191275;
+        position: fixed;
+        font-family: 'Poppins', sans-serif;
+        z-index: 1;
+    }
+    #top-head{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+        min-height: 30vh;
+        background-color: #191275;
+    }
+    .container{
+      margin-left: 1%;
+      margin-right: 1%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      
+    }
+    .button{
+      padding: 0.5%;
+      background-color: #191275;
+     
+      border-color: #F1E7FF;
+      color: #F1E7FF;
+      border-radius: 5px;
+      border: 1px solid;
+    box-shadow: 0px 0px 5px 2px #ece8e8;
+    }
+    #sub-head{
+        height: 20vh;
+        top:10vh;
+        max-width: 50%;
+        margin-top: 10vh;
+        margin-left:auto;
+        margin-right: auto;
+        margin-bottom:5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #F1E7FF;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+    #author{
+        float: right;
+        padding-right: 4%;
+        letter-spacing: 1px;;
+   }
+    .quote-content{
+        display: flex;
+        justify-content: space-between;
+    }
+    .semi{
+        font-size: 40px;
+        position:relative;
+        padding: 1%;
+
+    }
+    .write-up{
+        display: inline;
+        font-size: 22px;
+        letter-spacing: 1px;
+        margin: 5% 3% 3% 3%;
+        
+    }
+    .logo{
+        color:#F1E7FF;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-size: 25px;
+        position: absolute;
+        left: 47%;
+    }
+    .nav-links{
+        display: flex;
+        justify-content: space-around;
+        width: 30%;
+    }
+    .nav-links li{
+        list-style: none;
+    }
+    .inside-nav-links li{
+        list-style: none;
+        margin-top: 40px;
+
+    }
+    .nav-links a{
+        color: black;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .inside-nav-links a{
+        color:bisque;
+        margin-top: 75px;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .open-button{
+        text-decoration: none;
+        border: none;
+        outline:invert;
+        background-color: #191275;
+        color: #F1E7FF;
+        cursor: pointer;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 0.4rem;
+        border-radius: 5px;
+      border: 1px solid;
+    box-shadow: 0px 0px 5px 2px #ece8e8;
+    }
+ 
+  
+    .burger div{
+        width: 25px;
+        height: 2px;
+        background-color: #F1E7FF;
+        margin: 5px;
+    }
+    .burger{
+        display: none;
+    }
+
+    .slide-nav{
+        display: none;
+    }
+   
+    @media screen and (max-width:1400px){
+      .card{
+        width: 50%;
+      }
+        body{
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+        
+
+        #sub-head{
+            max-width: 70%;
+        }
+
+        .close-button1{
+            color: bisque;
+           align-self: flex-end;
+           margin: 10px;
+           padding-left: 2px;
+           padding-right: 2px;
+           font-size: 25px;
+           background-color: black;
+            border: none;
+        }
+     
+        .top-view{
+            margin: 20px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bolder;
+        }
+        #logo-in{
+            padding-right: 10px;
+        }
+        .slide-nav{
+            color: bisque;
+            position: absolute;
+            left:0px;
+            height: 100vh;
+            top:0vh;
+            background-color:black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            transform: translateX(-100%);
+            transition: transform 0.5s ease-in;
+            z-index: 1;
+        }
+        
+        .burger{
+            display:block;
+        }
+       
+    }
+   
+    .slide-nav-active{
+            transform: translateX(0%);
+        }
+
+       
+    .acheive-sec{
+        background-color: white;
+        padding-bottom: 2rem;
+        border:1px solid;
+    border-color:#009900; 
+    padding: 3px;
+    }
+
+    .Archeive-head{
+        
+        display: flex;
+        width: 500px;
+        justify-content: center;
+        background-color:white;
+        color: black;
+        letter-spacing: 1px;
+        font-family: 'Poppins', sans-serif;
+        box-shadow: 0px 0px 5px 2px #807b7b;
+        margin:auto;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+   
+    .acheive::-webkit-scrollbar{
+    height: 2px;
+    background-color:white;
+    border-radius:1px;
+    }
+    .acheive::-webkit-scrollbar-thumb{
+    background-color:black;
+    border-radius: 1px;
+    }
+
+#mid{
+  background-image: url("{% static 'images/meme-40.jpg' %}");
+  background-repeat:repeat-y;
+  background-size:cover;
+  border: 0.1px solid white;
+}
+
+    .card {
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    background: #F1E7FF;
+    font-family: roboto;
+    border:1px solid;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px 2px #969696;
+    }
+    
+     
+    .photo{
+      
+      width:40px;
+      height:40px;
+      border-radius: 20px;
+    }
+     
+    .nm{
+      padding-top:5px;
+    } 
+    .name{
+      display: flex;
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    .name-date{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 10px 10px 15px;
+    }
+    .caption{
+      background-color: white;
+      width: auto;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      word-wrap: break-word;
+    }
+    .Memeimage{
+      margin: 10px;
+    }
+    .image_size{
+      border-radius: 8px;
+       width: 100%;
+       height: 360px;
+    }
+    
+    
+    @media screen and (max-width:650px){
+      .open-button{
+        padding: 2px;
+        font-size: 10px;
+      }
+      .logo{
+        position: relative;
+        left: 2%;
+      }
+      .card{
+        width: 80%;
+      }
+      .Archeive-head{
+        width: 80%;
+      }
+      .navbar{
+        width: 100%;
+      }
+      .image_size{
+        height: 250px;
+      }
+    }
+    .card-image {
+   
+    width: 5rem ;
+    height: 5rem;
+    margin-left: 6.5rem;
+    align-content: center;
+    border-radius: 50%;
+    grid-area: image;
+    position: relative;
+    bottom: 2.5rem;
+    background: url("img1.jpg");
+    background-size: cover;
+
+    }
+
+    .card-text {
+    grid-area: text;
+    margin: 2rem;
+    }
+    .card-text .name {
+    color: rgb(255, 7, 110);
+    font-size:13px;
+    }
+    .card-text p {
+    max-height: 10rem;
+    color: grey;
+    font-size:15px;
+    font-weight: 300;
+    padding: 0rem 1rem 1rem 1rem;
+    margin-top: 0.5rem;
+    overflow-y: scroll;
+    }
+    .card-text p::-webkit-scrollbar{
+    width: 4px;
+    background-color:white;
+    border-radius: 0 8px 8px 0;
+    }
+    .card-text p::-webkit-scrollbar-thumb{
+    background-color: bisque;
+    border-radius: 8;
+    }
+    .card-text h2 {
+    margin-top: 1rem;
+    font-size:28px;
+   
+    }
+    
+    footer {
+
+background-color:black;
+display: block;
+width: 100%
+}
+
+.inner-footer {
+width: 95%;
+margin: auto;
+padding: 30px 10px;
+display: flex;
+flex-wrap: wrap;
+box-sizing: border-box;
+justify-content: center;
+}
+
+.footer-items {
+display: flex;
+padding: 1rem;
+box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+.footer-items h1 {
+font-size: 40px;
+color: bisque;
+text-transform: uppercase;
+align-self: start;
+}
+
+.footer-items h2 {
+
+text-align: center;
+color:aqua;
+font-size: 16px;
+font-weight: lighter;
+text-transform: uppercase;
+}
+
+.border {
+position: relative;
+width: 100%;
+height: 100%;
+text-align: center;
+
+
+}
+
+.inner-footer ul {
+list-style: none;
+color:b;
+font-size: 15px;
+
+
+}
+
+.inner-footer ul a {
+    color:bisque;
+text-decoration: none;
+outline: none;
+color: none;
+transition: 0.3s;
+
+}
+
+.inner-footer ul a:hover {
+color: #ff9800;
+}
+
+.inner-footer ul li {
+margin: 10px;
+height: 25px;
+position: relative;
+}
+
+.inner-footer li i {
+margin-right: 20px;
+text-align: center;
+}
+
+.social a {
+text-decoration: none;
+float: right;
+}
+
+.social i {
+height: 15px;
+width: 15px;
+margin: 20px 5px;
+padding: 10px;
+color:bisque;
+border-radius: 50%;
+border: 1px solid gray;
+transition: 0.3s;
+
+}
+
+.social i:hover {
+background: gray;
+
+}
+
+.footer-bottom {
+padding: 20px;
+background: #334e5a;
+color:bisque;
+font-size: 12px;
+}
+@media screen and (max-width: 1085px) {
+    .footer-items {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .footer-items {
+      width: 100%;
+    }
+  }
+  [data-tab-content]{
+        display: none;
+      }
+      
+      [data-tab-content]{
+        display: none;
+      }
+      
+      .active[data-tab-content]{
+         
+          width: 450px;
+          max-width: 100%;
+          border: 8px;
+          border-left: #1A73E8;
+          border-right: #1A73E8;
+          background-color: #FFFFFF;
+          display: grid;
+          justify-items: center;
+          align-items: top;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          box-shadow: 0px 0px 1px 0px black;
+          z-index: 1;
+        }
+        .close-button
+        {
+          color:  #F1E7FF;
+        }
+        .modal{
+          padding: 4px;
+          position: fixed;
+          top:50%;
+          left:50%;
+          transform: translate(-50%,-50%) scale(0);
+          transition: 200ms ease-in-out;
+         
+          align-items: center;
+          border-radius:10px;
+          z-index: 10;
+          background-color:#191275;
+          color:  #F1E7FF;
+          width: 450px;
+           max-width: 80%;
+        }
+      
+      
+        .modal.active {
+          transform: translate(-50%,-50%) scale(1);
+        }
+        .modal-header{
+          
+          padding: 10px 15px;
+          display: flex;
+          justify-content: left;
+          align-items: right;
+        }
+        .modal-header .title {
+          font-style: italic;
+          font-weight: lighter;
+        }
+        .modal-header .close-button{
+          
+          cursor: pointer;
+          border: none;
+          outline: none;
+          background: none;
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
+      
+        #overlay{
+          position: fixed;
+          opacity: 0;
+          top:0;
+          left:0;
+          right:0;
+          bottom:0;
+          background-color: rgba(0, 0, 0, 0.8);
+          pointer-events: none;
+          z-index: 1;
+        }
+        #overlay.active{
+          opacity: 1;
+          pointer-events: all ;
+        }
+        
+        #tab-name{
+          display: flex;
+          justify-content: center;
+          }
+      
+        #tab1{
+         
+         
+          width: 100%;   
+           margin:0;
+           border-top-left-radius: 10px;
+           border-top-right-radius: 10px;
+           text-align: center;
+          font-weight: bold;
+          background-color: #3a3a3a;
+          color: #F1E7FF;
+          list-style-type: none;
+          cursor: pointer;
+          padding:10px 10px 10px 10px;
+        }
+      
+        #tab1.active{
+          color: black;
+          background-color: #F1E7FF;
+          font-family: 'Poppins', sans-serif;
+          font-size: larger;
+        }
+        #tab2{
+          float: right;
+          width: 221px;
+          max-width: 100%;
+          margin:0;
+           border-top-right-radius: 10px;
+           justify-content: space-around;
+           text-align: center;
+          font-weight: bold;
+          background-color: #3a3a3a;
+          color: white;
+          list-style-type: none;
+          cursor: pointer;
+          padding:10px;
+        }
+      
+        #tab2.active{
+          color: black;
+          background-color: white;
+        }
+      
+      
+      
+      
+      
+        #main-holder {
+          width: 100%;
+          height: 100%;
+      
+          display: grid;
+          justify-items: center;
+          align-items: center;
+          background-color: #1A73E8;
+          background-color: rgba(36, 7, 104, 0.2);
+        }
+      
+      #main-holder-in{
+        width: 100px;
+        background-color: #1A73E8;
+      }
+        
+      
+      
+      
+        #forget{
+          width: 20%;
+          text-align: left;
+          margin: 0;
+          padding: 5px;
+          font-size: 10px;
+          font-weight: bold;
+          color: #8a0000;
+        }
+      
+      
+      
+      
+        .logo_size{
+          margin-top: 20px;
+          max-width: 120px;
+          max-height: 120px;
+        }
+        .title{
+          width: 100%;
+          text-align: center;
+          font-size: 20px;
+          font-weight: bold;
+          border:5px;
+          border-color: black;
+          
+        }
+        .title1{
+            color: black;
+          width: 100%;
+          text-align: center;
+          font-size: 20px;
+          font-weight: bold;
+          border:5px;
+          border-color: black;
+          margin: 20px;
+        }
+      
+        .error-msg {
+          width: 80%;
+          text-align: left;
+          margin: 0;
+          font-size: 10px;
+          font-weight: bold;
+          color: #8a0000;
+          background-color: #FFFFFF;
+        }
+        #icon-1 {
+          width: 30%;
+          height: 20%;
+          
+          margin-left: 20%;
+          margin-right: 20%;
+         
+        }
+      
+      
+        .select-box{
+          width: 84%;
+        }
+      
+        .select-box .options-container{
+            
+          background: #2f3640;
+          color: #f5f6fa;
+          max-height: 0px;
+          width: 82%;
+          opacity: 0;
+          transition: all 0.4s;
+          border-radius: 8px;
+          overflow: hidden;
+          position: absolute;
+          order: 1;
+        }
+      
+      
+      
+        .selected{
+            width: 100%;
+          background: #2f3640;
+          border-radius: 10px;
+          margin-bottom: 1px;
+          font-size: 14px;
+          color:  #f5f6fa;
+          position : relative;
+          order:0;
+        }
+      
+        .selected::after{
+          content: "";
+          
+          background-size: contain;
+          background-repeat: no-repeat;
+      
+          position: absolute;
+          height: 100%;
+          width: 32px;
+          right: 10px;
+          top: 5px;
+          
+          transition: all 0.4s;
+        }
+      
+        .select-box .options-container.active{
+          max-height: 120px;
+          max-width: 500px;
+          opacity: 1;
+          overflow-y: scroll;
+        }
+      
+        .select-box .options-container.active + .selected::after {
+          transform: rotateY(180deg);
+      
+        }
+        .select-box .options-container::-webkit-scrollbar{
+          width: 8px;
+          background: #0d141f;
+           border-radius: 0 8px 8px 0;
+        }
+      
+        .select-box .options-container::-webkit-scrollbar-thumb{
+          background: #525861;
+          border-radius: 0px 8px 8px 0;
+        }
+      
+        .select-box .option, .selected{
+          padding: 10px 14px 10px 14px;
+          cursor: pointer;
+        }
+      
+        .select-box .option:hover{
+          background: #414b57;
+        }
+      
+        .select-box label{
+          cursor: pointer;
+          padding-right: 90px;
+        }
+      
+        .select-box .option .radio{
+          display: none;
+        }
+      
+        #Sign-up-form {
+          width: 100%;
+          height: 100%;
+      
+      
+          margin-bottom: 20%;
+          align-self: flex-start;
+          display: grid;
+          justify-items: center;
+          align-items: top;
+        }
+      
+        .Sign-up-form-field::placeholder {
+          color: black;
+        }
+      
+        .Sign-up-form-field {
+          width: 70%;
+          height: 70%;
+          
+          background-color: #E8F0FE;
+      
+          border: 1px;
+          margin-bottom: 10px;
+          border-radius: 10px;
+          outline: none;
+          padding: 5px 5px 5px 15px;
+        }
+      
+        #Sign-up-form-submit {
+          width: 70%;
+          height: 40%;
+          margin-bottom: 50px;
+          padding: 10px;
+          border: none;
+          border-radius: 10px;
+          color: #F1E7FF;
+          font-weight: bold;
+          background-color: #191275;
+          cursor: pointer;
+          outline: none;
+        }
+       
+          .dropdown {
+                  float: left;
+                  overflow: hidden;
+              }
+              
+              .dropdown .dropbtn {
+                  font-size: 14px;
+                  border: none;
+                  color:black;
+                  background-color: inherit;
+                  font-family: inherit;
+                  padding: 1rem;
+              }
+              
+              .dropdown-content {
+                  display: none;
+                  position: absolute;
+                  background-color:bisque;
+                  color: black;
+                  min-width: 160px;
+                  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                  z-index: 1;
+              }
+              
+              .dropdown-content a {
+                  float: none;
+                  color: black;
+                  padding: 12px 16px;
+                  text-decoration: none;
+                  display: block;
+                  text-align: left;
+              }
+              
+              .topnav a:hover,
+              .dropdown:hover .dropbtn {
+                  background-color:aqua;
+                  color:black;
+              }
+              
+              .dropdown-content a:hover {
+                  background-color:black;
+                  color:bisque;
+              }
+              
+              .dropdown:hover .dropdown-content {
+                  display: block;
+              }
+              @media screen and (max-width: 600px) {
+     
+  }
+
+
+</style>   
+
+<script>
+  var current = -1;
+  
+   async function buildBookList(){
+        var memeList = document.getElementById('mid');
+        console.log(memeList);
+        var url='http://127.0.0.1:8000/memes';
+
+        await fetch(url)
+        .then((resp) => resp.json())
+        .then( async function(data){
+            var list = data;
+            for(var i in list)
+            {
+                console.log(list[i]);
+                console.log("yess");
+
+                        
+                item = ` <div class="card" >
+                              <div class="name">
+                                <div class="profile"><img src="{% static 'images/ProfilePhoto.png' %}" class="photo"></div>
+                                <div class="name-date">
+                                  <p class="nm" id="name${list[i].id}">${list[i].name}</p> 
+                                  <button class="open-button" id="${list[i].id}" onclick="myFunction(${list[i].id})" style="height:30px; font-size:10px; margin-bottom:2px;  " data-modal-target="#modal1">EDIT MEME</button>
+                                </div>
+                              </div>
+                              <div class="caption">
+                                <p id='cap${list[i].id}'>${list[i].caption}</p>
+                              </div>
+                              <div class="Memeimage">
+                                <img src="${list[i].url}" id="img${list[i].id}" class="image_size">
+                              </div>
+                            </div>   
+                        ` ;
+                memeList.innerHTML+=item;
+                
+            }
+  const openModalButtons = document.querySelectorAll('[data-modal-target]')
+  const closeModalButtons = document.querySelectorAll('.close-button')
+  const overlay = document.getElementById('overlay')
+
+  openModalButtons.forEach(button => {
+    console.log("entered")
+      button.addEventListener('click', () => {
+          const modal = document.querySelector(button.dataset.modalTarget)
+          console.log(modal)
+          openModal(modal)
+      })
+  })
+
+  overlay.addEventListener('click', () => {
+      const modals = document.querySelectorAll('.modal.active')
+      modals.forEach(modal => {
+          closeModal(modal)
+      })
+       const modals1 = document.querySelectorAll('.modal1.active')
+      modals1.forEach(modal => {
+          closeModal(modal)
+      })
+  })
+
+  closeModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+          const modal = button.closest('.modal')
+          closeModal(modal)
+          const modal1 = button.closest('.modal1')
+          closeModal(modal1)
+      })
+  })
+
+  function openModal(modal) {
+      if (modal == null) return
+      modal.classList.add('active')
+      overlay.classList.add('active')
+  }
+
+  function closeModal(modal) {
+      if (modal == null) return
+      modal.classList.remove('active')
+      overlay.classList.remove('active')
+  }
+
+  const tabs = document.querySelectorAll('[data-tab-target]')
+  const tabContents = document.querySelectorAll('[data-tab-content]')
+
+  tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+          const target = document.querySelector(tab.dataset.tabTarget)
+          tabContents.forEach(tabContent => {
+              tabContent.classList.remove('active')
+          })
+          tabs.forEach(tab => {
+              tab.classList.remove('active')
+          })
+          tab.classList.add('active')
+          target.classList.add('active')
+      })
+  })
+
+            
+        })
+    }
+    buildBookList()
+    console.log("hello");
+     
+    function myFunction(id){
+      current = id
+      var active = document.getElementById(id.toString());
+      let x = "img"+ id.toString()
+      let y = "cap" + id.toString()
+      let val = document.getElementById(y).innerHTML.toString()
+
+      document.getElementById('caption').value = val
+      document.getElementById('imageurl').value = document.getElementById(x).src
+      
+    }
+    
+    function update()
+    {
+      console.log("op")
+       let x = "img"+ current.toString()
+       let y = "cap" + current.toString()
+       let z = "name" + current.toString()
+       
+       let name = document.getElementById(z).innerHTML.toString()
+       let url2 =document.getElementById('imageurl').value
+       let cap =  document.getElementById('caption').value
+
+        let data = JSON.stringify({"name": name, "url": url2, "caption":cap });
+        let csrftoken = getCookie('csrftoken');
+
+        let url1 = "http://127.0.0.1:8000/memes/"+current.toString()
+        console.log(url1)
+        let response = fetch(url1, {
+            method: "PATCH",
+            body: data,
+            headers: { 'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken },
+        })
+    }
+
+    function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                  var cookie = cookies[i].trim();
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+
+</script>
