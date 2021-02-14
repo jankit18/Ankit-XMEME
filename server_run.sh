@@ -1,4 +1,4 @@
 #!/bin/bash
 cd XMEME
 
-python manage.py runserver 8081
+python3 manage.py runserver 8081
