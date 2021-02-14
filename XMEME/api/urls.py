@@ -3,8 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.ApiOverview, name = 'apiView'),
-    path('memes/', views.FeedList, name = 'feedList'),
-    path('memes/<int:pk>', views.FeedDetail, name = 'feedDetail'),
+    path('', views.FeedList, name = 'feedList'),
+    path('<int:pk>', views.FeedDetail, name = 'feedDetail'),
 ]
 

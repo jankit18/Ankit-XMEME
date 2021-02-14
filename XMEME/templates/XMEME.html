@@ -1005,7 +1005,7 @@ font-size: 12px;
    async function buildBookList(){
         var memeList = document.getElementById('mid');
         console.log(memeList);
-        var url='http://127.0.0.1:8000/memes';
+        var url='http://127.0.0.1:8081/memes';
 
         await fetch(url)
         .then((resp) => resp.json())
@@ -1130,7 +1130,7 @@ font-size: 12px;
         let data = JSON.stringify({"name": name, "url": url2, "caption":cap });
         let csrftoken = getCookie('csrftoken');
 
-        let url1 = "http://127.0.0.1:8000/memes/"+current.toString()
+        let url1 = "http://127.0.0.1:8081/memes/"+current.toString()
         console.log(url1)
         let response = fetch(url1, {
             method: "PATCH",
