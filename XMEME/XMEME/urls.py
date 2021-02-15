@@ -22,6 +22,7 @@ from drf_yasg import openapi
 
 ...
 
+# Swagger View Schema
 schema_view = get_schema_view(
    openapi.Info(
       title="Snippets API",
@@ -37,6 +38,7 @@ schema_view = get_schema_view(
 
 
 
+# Main URL Path Through Server IP
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('swagger-ui/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

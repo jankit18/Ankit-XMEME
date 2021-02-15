@@ -1,6 +1,6 @@
 from django.db import models
 
-
+# Model with fields name url and caption
 class ContentImage(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=1000)
@@ -8,4 +8,4 @@ class ContentImage(models.Model):
    
 
     def __str__(self):
-        return self.name + " ("+ str(self.id) + ") "
+        return self.name + " ("+ str(self.id) + ") " 

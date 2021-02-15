@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo apt-update
-sudo apt install python3
-sudo apt install python3-pip
-pip3 install django
-pip3 install djangorestframework
-pip3 install -U drf-yasg 
+echo "Y" | sudo apt-update
+echo "Y" | sudo apt install python3
+echo "Y" | sudo apt install python3-pip
+echo "Y" | pip3 install django
+echo "Y" | pip3 install djangorestframework
+echo "Y" | pip3 install -U drf-yasg 

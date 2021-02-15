@@ -13,7 +13,6 @@ def Content(request):
         
         if len(userName)==0 or len(imageUrl)==0 or len(caption)==0 :
             messages.info(request,'Post Unsuccessfully Some Field is Empty !')
-            print("chitya")
             return redirect('contentPage')
 
 

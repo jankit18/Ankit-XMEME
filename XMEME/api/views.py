@@ -1,21 +1,14 @@
 
-from django.shortcuts import render
-from django.http import JsonResponse
+from rest_framework.decorators import api_view  # Importing api_view from rest_framework decorators
+from rest_framework.response import Response    # Importing Response from rest_framework.response
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
-from .serializers import UserContentSerializer
-from meme.models import ContentImage
+from .serializers import UserContentSerializer  # Importing ContentImage from meme app model
+from meme.models import ContentImage      # Importing ContentImage from meme app model
 
 
-@api_view(['GET'])
-def ApiOverview(request):
-    api_urls = {
-        'memes' : '/memes',
-        'userMeme' : '/memes/<int:pk>'
-    }
-    return Response(api_urls)
+
+# GET for Fetching Recent 100 MEMES Sorted Based On Ascending Submission Time
+# POST for Posting New Meme
 
 @api_view(['GET','POST'])
 def FeedList(request):
@@ -30,6 +23,9 @@ def FeedList(request):
 
     return Response(serializer.data)
 
+
+# GET for Fetching the meme with (id=pk)
+# PATCH for Updating the meme with (id=pk)
 
 @api_view(['GET','PATCH'])
 def FeedDetail(request,pk):    
