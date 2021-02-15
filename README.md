@@ -25,5 +25,13 @@
 - [**API Documentation**]()
   - http:127.0.0.1:8081/swagger-ui
   - For displaying API data using swagger API Documentation.
+  
+  # Script Automation :
+  - install.sh for complete requirement installation. 
+  - sleep.sh to sleep the procees for 60 seconds.
+  - server_run.sh for running the server at port 8081.
+  - test_server.sh for complete installation and server testing, 
+    it invokes install.sh, sleep.sh, server_run.sh.
+  
 
 *Thank you*
