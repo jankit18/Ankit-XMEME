@@ -26,7 +26,7 @@
   - http:127.0.0.1:8081/swagger-ui
   - For displaying API data using swagger API Documentation.
   
-  # Script Automation :
+# Script Automation :
   - install.sh for complete requirement installation. 
   - sleep.sh to sleep the procees for 60 seconds.
   - server_run.sh for running the server at port 8081.
