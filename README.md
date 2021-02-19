@@ -13,7 +13,7 @@
 
 - [**GET,POST**]()
   - http:127.0.0.1:8081/memes/
-  - GET for Fetching Recent 100 MEMES Sorted Based On Ascending Submission Time
+  - GET for Fetching Recent 100 MEMES Sorted in Ascending Order of Submission Time
   - POST for Posting New Meme
 
 
